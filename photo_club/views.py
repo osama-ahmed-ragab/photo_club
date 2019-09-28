@@ -4,4 +4,5 @@ from django.contrib.auth.decorators import login_required
 from .models import Photo
 
 def photo_list(request):
-    return render(request, 'photo_club/base.html')
+     post = Photo.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+     return render(request, 'photo_club/base.html',{'post' : post})
