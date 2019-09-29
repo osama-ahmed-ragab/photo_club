@@ -1,6 +1,11 @@
 body{
-    background-color: bisque
+    padding-left: 15px;
+    background-color: black;
+
 }
 h1{
-    color: chocolate
+    color: royalblue
+}
+p {
+    color: darkgray
 }

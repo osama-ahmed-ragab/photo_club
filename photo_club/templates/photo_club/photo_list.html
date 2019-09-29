@@ -1,4 +1,4 @@
-{% extends 'blog/base.html' %}
+{% extends 'photo_club/base.html' %}
 
 
 {% block content %} 
@@ -7,7 +7,7 @@
             <div class="date">
                 {{ post.published_date }}
             </div>
-            <h2><a href="{% url 'post_list' %}">{{ post.title }}</a></h2>
+            <h2><a href="{% url 'photo_list' %}">{{ post.title }}</a></h2>
             <p>{{ post.image|linebreaksbr }}</p>
         </div>
     {% endfor %}
