@@ -117,8 +117,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-("django.contrib.staticfiles.finders.FileSystemFinder",
- "django.contrib.staticfiles.finders.AppDirectoriesFinder")
 
 STATIC_URL = '/static/'
 

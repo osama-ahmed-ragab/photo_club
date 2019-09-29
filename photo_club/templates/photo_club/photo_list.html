@@ -4,10 +4,9 @@
 
 {% block content %} 
     {% for post in posts %}
-        <div class="post">
-            <h2><a href="{% url 'photo_list' %}">{{ post.title }}</a></h2>
-            {{ post.published_date }}
-            <br><img src="{{post.image.url}}" height="100px" width="100px">
-            <p>{{linebreaksbr }}</p>
+        <div id="post">
+            <a href="*"><img src="{{post.image.url}}" height="100px" width="100px"</a>
+          <h5 class="title"><a href="{% url 'photo_list' %}">{{ post.title }}</a></h5>
+        </div>
     {% endfor %}
-{% endblock %}
+{% endblock %} 
