@@ -7,6 +7,12 @@ body{
 p {
     color: darkgray
 }
+h3 {
+    font-family: 'Lobster', cursive;
+    color: dodgerblue;
+    font-size: 30pt;
+    
+}
 .page-header {
     background-color: #000000;
     margin-top: 0;
@@ -54,5 +60,4 @@ p {
 .title {
       text-align: center;
       font-family: 'Lobster', cursive;
-
 }

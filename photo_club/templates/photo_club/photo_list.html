@@ -5,8 +5,8 @@
 {% block content %} 
     {% for post in posts %}
         <div id="post">
-            <a href="*"><img src="{{post.image.url}}" height="100px" width="100px"</a>
-          <h5 class="title"><a href="{% url 'photo_list' %}">{{ post.title }}</a></h5>
+            <a href="{% url 'photo_detail' pk=post.pk %}"><img src="{{post.image.url}}" height="100px" width="100px"></a>
+          <h5 class="title"><a href="{% url 'photo_detail' pk=post.pk %}">{{ post.title }}</a></h5>
         </div>
     {% endfor %}
 {% endblock %} 

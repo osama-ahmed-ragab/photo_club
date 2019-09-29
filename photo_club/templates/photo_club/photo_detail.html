@@ -1,0 +1,9 @@
+{% extends 'photo_club/base.html' %}
+{% load staticfiles %}
+    
+{% block content %} 
+    <div id="post">
+        <a href="{% url 'photo_detail' pk=post.pk %}"><img src="{{post.image.url}}" height="300px" width="300px"></a>
+        <h5 class="title"><a href="{% url 'photo_detail' pk=post.pk %}">{{ post.title }}</a></h5>
+    </div>
+{% endblock %} 
