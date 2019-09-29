@@ -9,7 +9,7 @@ class Tag(models.Model):
         return self.name
 
 class Photo(models.Model):
-    image = models.ImageField(upload_to='images/', height_field=None, width_field=None)
+    image = models.ImageField(upload_to='images', height_field=None, width_field=None)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     published_date = models.DateTimeField(blank=True, null=True)
