@@ -27,7 +27,7 @@ def photo_edit(request, pk):
 
 def photo_new(request):
     if request.method == "POST":
-        form = PhotoForm(request.POST)
+        form = PhotoForm(request.POST,request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
             post.owner = request.user
