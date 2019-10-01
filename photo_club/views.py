@@ -2,8 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, CreateView, UpdateView 
-from .models import Photo
-from .forms import PhotoForm
+from .models import Photo, Comment
+from .forms import PhotoForm, CommentForm
 
 def photo_list(request):
     posts = Photo.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
@@ -24,6 +24,45 @@ def photo_edit(request, pk):
     else:
         form = PhotoForm(instance=post)
     return render (request, 'photo_club/photo_edit.html', {'form': form} )
+
+def photo_new(request):
+    if request.method == "POST":
+        form = PhotoForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.owner = request.user
+            post.published_date = timezone.now()
+            post.save()
+            #post.publish()
+            return redirect('photo_detail', pk=post.pk)
+    else:
+        form = PhotoForm()
+    return render(request, 'photo_club/photo_edit.html', {'form': form})
+
+
+def add_comment_to_photo(request, pk):
+    post = get_object_or_404(Photo, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return redirect('photo_detail', pk=post.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'photo_club/add_comment_to_photo.html', {'form': form})
+
+
+def comment_approve(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.approve()
+    return redirect('photo_detail', pk=comment.post.pk)
+
+def comment_remove(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.delete()
+    return redirect('photo_detail', pk=comment.post.pk)
 '''
 class photo_edit(UpdateView):
     model = Photo
@@ -40,3 +79,4 @@ class photo_edit(UpdateView):
         post.save()
         return render (request, 'photo_club/photo_edit.html', {'form': form} )
 '''
+

@@ -5,5 +5,29 @@
     <div id="post">
         <a href="{% url 'photo_detail' pk=post.pk %}"><img src="{{post.image.url}}" height="300px" width="300px"></a>
         <h5 class="title"><a href="{% url 'photo_detail' pk=post.pk %}">{{ post.title }}</a></h5>
+        {% if user.is_authenticated %}
+        <a class="btn btn-default" href="{% url 'photo_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        {% endif %}
     </div>
+
+<div>
+    <a class="btn btn-default" href="{% url 'add_comment_to_photo' pk=post.pk %}">Add comment</a>
+       {% for comment in post.comments.all %}
+            {% if user.is_authenticated or comment.approved_comment %}
+                <div class="comment">
+                    <div class="date">
+                        {{ comment.created_date }}
+                        {% if not comment.approved_comment %}
+                            <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                            <a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+                        {% endif %}
+                    </div>
+                    <strong>{{ comment.author }}</strong>
+                    <p>{{ comment.text|linebreaks }}</p>
+                </div>
+            {% endif %}
+        {% empty %}
+            <p>No comments here yet :(</p>
+        {% endfor %}
+</div>
 {% endblock %} 
