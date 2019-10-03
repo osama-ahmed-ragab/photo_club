@@ -3,7 +3,6 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 
-
 class Tag(models.Model):
     name = models.CharField(max_length=50, unique=True)
     
@@ -15,7 +14,7 @@ class Photo(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length =100, blank=True)
     published_date = models.DateTimeField(blank=True, null=True)
-    #tags = models.ManyToManyField(Tag,required = False ,blank=True, null=True)
+    tags = models.ManyToManyField(Tag, null=True)
     
     def approved_comments(self):
         return self.comments.filter(approved_comment=True)

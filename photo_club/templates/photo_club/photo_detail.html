@@ -5,9 +5,11 @@
     <div id="post">
         <a href="{% url 'photo_detail' pk=post.pk %}"><img src="{{post.image.url}}" height="300px" width="300px"></a>
         <h5 class="title"><a href="{% url 'photo_detail' pk=post.pk %}">{{ post.title }}</a></h5>
+        <h6>{{ post.tags }}</h6>
         {% if user.is_authenticated %}
         <a class="btn btn-default" href="{% url 'photo_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
         {% endif %}
+        <a class="btn btn-default" href="{% url 'add_tag' pk=post.pk %}">Add Tag</a>
     </div>
 
 <div>

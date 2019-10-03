@@ -7,6 +7,7 @@
         <div id="post">
             <a href="{% url 'photo_detail' pk=post.pk %}"><img src="{{post.image.url}}" height="100px" width="100px"></a>
           <h5 class="title"><a href="{% url 'photo_detail' pk=post.pk %}">{{ post.title }}</a></h5>
+            <h6>{{ post.tags }}</h6>
         </div>
     {% endfor %}
 {% endblock %} 

@@ -33,7 +33,6 @@ def photo_new(request):
             post.owner = request.user
             post.published_date = timezone.now()
             post.save()
-            #post.publish()
             return redirect('photo_detail', pk=post.pk)
     else:
         form = PhotoForm()
@@ -78,5 +77,17 @@ class photo_edit(UpdateView):
         post.updated_at = timezone.now()
         post.save()
         return render (request, 'photo_club/photo_edit.html', {'form': form} )
-'''
 
+def add_tag(request,pk):
+    post = get_object_or_404(Photo, pk=pk)
+    if request.method == "POST":
+        form = TagForm(request.POST)
+        if form.is_valid():
+            tg = form.save()
+            post.tags.add(tg) 
+            post.save()
+            return redirect('photo_detail', pk=post.pk)
+    else:
+        form = TagForm()
+    return render(request, 'photo_club/add_tag.html', {'form': form})
+'''
